@@ -12,7 +12,7 @@ pipeline {
   stages {
     stage('Check out') {
       steps {
-        git credentialsId: '1', url: 'https://github.com/leiax00/universe-view.git'
+        git credentialsId: '1', url: 'git@github.com:leiax00/universe-view.git'
       }
     }
     stage('Build') {
