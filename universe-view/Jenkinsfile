@@ -12,16 +12,20 @@ pipeline {
   stages {
     stage('Check out') {
       steps {
-        git credentialsId: 'server-tx', url: 'git@github.com:leiax00/universe-view.git'
+        dir('code') {
+          git credentialsId: 'tx-ssh-private', url: 'git@github.com:leiax00/universe-view.git'
+        }
       }
     }
     stage('Build') {
       steps{
-        echo '='*50 + '更新依赖包' + '='*50
-        sh 'yarn install'
-        echo '='*50 + '开始构建' + '='*50
-        sh 'yarn build:prod'
-        echo 'build success!'
+        dir('code') {
+          echo '='*50 + '更新依赖包' + '='*50
+          sh 'yarn install'
+          echo '='*50 + '开始构建' + '='*50
+          sh 'yarn build:prod'
+          echo 'build success!'
+        }
       }
     }
     stage('Deploy') {
